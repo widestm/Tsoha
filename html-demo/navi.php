@@ -5,7 +5,7 @@
             <div class="panel panel-default">
                 <ul class="nav">
                     <li class="active"><a href="etusivu.php">Etusivu</a></li>
-                    <li><a href="#">Askareet</a></li>
+                    <li><a href="askareenmuokkaus.php">Temp. muokkaa Askaretta</a></li>
                     <li><a href="#">Tärkeysasteet</a></li>
                     <li><a href="#">Luokat</a></li>
                     <li><a href="kirjautuminen.php">Kirjaudu ulos</a></li>

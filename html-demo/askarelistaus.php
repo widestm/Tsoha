@@ -3,7 +3,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Otsikko</th>
+                        <th>Otsikko</th> 
                         <th>Kuvaus</th>
                         <th>Prioriteetti</th>
                         <th>Luokka</th>
@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td>Syö aamupalaa</td>
-                        <td>Kahvi riittää jos kiire</td>
+                        <td>Kahvi riittää jos on kiire</td>
                         <td>Tärkeä</td>
                         <td>Kotona</td>
                         <td>4.1.2000</td>

@@ -10,15 +10,23 @@
         <title>Muistilista</title>
     </head>
     <body>
-        <h1>Muistilista</h1>
-        <br><br>
+        <div id="header">
+            <h1>Muistilista</h1>
+        </div>
+        <div id="right">
+            <div id="content">
+                <p>Tervetuloa käyttämään tätä nerokasta ja upeasti toteutettua muistilistaa!</p>
+                <p>Tällä sivulla näet kaikki luomasi askareet järjestettynä tärkeyden tai luokkien mukaan.</p>
+                <p>Sinulla on tällä hetkellä 6 askaretta joista tekemättä 4 ja niistä yksi on luokiteltu Erittäin tärkeäksi.</p>
+            </div>
+        </div>
         
-        <?php
-        require 'navi.php';
-        ?>
-        <div class="blocktext">
-            <p>Tervetuloa käyttämään tätä nerokasta ja upeasti toteutettua muistilistaa!</p>
-            <p>Tällä sivulla näet kaikki luomasi askareet järjestettynä tärkeyden tai luokkien mukaan</p>
+        <div id="left">
+            <div class="box">
+                <?php
+                require 'navi.php';
+                ?>
+            </div>
         </div>
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">Tärkeysjärjestyksessä</a></li>
