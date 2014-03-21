@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="../css/bootstrap.css" rel="stylesheet">
-        <link href="../css/bootstrap-theme.css" rel="stylesheet">
-        <link href="../css/main.css" rel="stylesheet">
-        
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
     </head>
     <body>
-        
+        <div>TODO write content</div>
     </body>
 </html>
