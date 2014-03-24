@@ -3,7 +3,7 @@
 
 CREATE TABLE users (
   id serial PRIMARY KEY,
-  kayttajanimi varchar UNIQUE,
+  kayttajanimi varchar UNIQUE NOT NULL,
   salasana varchar NOT NULL
 );
 

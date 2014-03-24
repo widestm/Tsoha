@@ -1,10 +1,11 @@
 <?php
 //require_once sisällyttää annetun tiedoston vain kerran
-require_once 'tietokantayhteys.php';
-require_once '../models/Kayttaja.php';
+require_once '../libs/tietokantayhteys.php';
+require_once '../libs/kayttaja.php';
 //Lista asioista array-tietotyyppiin laitettuna:
 echo 'Jostain syystä en pääse seuraavan rivin ohi eikä ohjelma kysely tuota mitään :(';
 $lista = Kayttaja::etsiKaikkiKayttajat();
+echo 'moi';
 ?><!DOCTYPE HTML>
 
 <html>
