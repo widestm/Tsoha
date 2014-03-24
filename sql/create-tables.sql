@@ -14,6 +14,7 @@ CREATE TABLE kuvaus (
   kuvausteksti text NOT NULL
 );
 
+
 -- Luokkataulun luonti
 
 CREATE TABLE luokka (
@@ -22,7 +23,6 @@ CREATE TABLE luokka (
   kuvaus_id integer REFERENCES kuvaus(id) ON DELETE CASCADE,
   aliluokka integer REFERENCES luokka(id)
 );
-
 
 -- Tärkeysastetaulun luonti
 
@@ -34,11 +34,11 @@ CREATE TABLE tarkeysaste (
 
 -- Askaretaulun luonti
 
-CREATE TABLE askareet (
+CREATE TABLE askare (
   id serial PRIMARY KEY,
   otsikko varchar NOT NULL,
   valmis boolean DEFAULT FALSE,
-  lisayspvm date NOT NULL DEFAULT CURRENT_DATE,
+  lisapyspvm date NOT NULL DEFAULT CURRENT_DATE,
   user_id integer REFERENCES users(id) ON DELETE CASCADE,
   kuvaus_id integer REFERENCES kuvaus(id) ON DELETE CASCADE,
   prioriteetti_id integer REFERENCES tarkeysaste(id) ON DELETE CASCADE,

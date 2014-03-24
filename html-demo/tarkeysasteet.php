@@ -10,18 +10,17 @@
     </head>
     <body>
         <div id="header">
-            <h1>Luokat</h1>
-        </div>
-        <div id="right">
-            <div id="content">
-                <p>Tällä sivulla listataan kaikki luokat ja niiden mahdolliset alaluokat</p>
-                <a href="luokanmuokkaus.php">Luokkaa klikaamalla pääsee muokkaus/poistosivulle</a>
-            </div>
+            <h1>Tarkeysasteet</h1>
         </div>
         <div id="left">
             <?php
             require './navi.php';
             ?>
         </div>
+
+        <?php
+        require 'prioriteettilistaus.php';
+        ?>
+
     </body>
 </html>

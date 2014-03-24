@@ -44,7 +44,8 @@
                     <div class="form-group">
                         <label for="valitseLuokka" class="col-md-2 control-label">Luokka</label>
                         <div class="col-md-3">
-                            <select class="form-control">
+                            <select multiple class="form-control">
+                                <option>Ei luokkaa</option>
                                 <option>Kotityöt</option>
                                 <option>Koulu</option>
                                 <option>Jos jaksaa</option>
@@ -52,6 +53,12 @@
                                 <option>Ehkä huomenna</option>
                                 <option>Ehhh...</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="kuvaus" class="col-md-2 control-label">Kuvaus:</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" rows="3" placeholder="Askareen kuvaus"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

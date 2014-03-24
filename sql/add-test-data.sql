@@ -22,7 +22,7 @@ INSERT INTO tarkeysaste (otsikko, prioriteetti) VALUES
   ('Ehkä huomenna', 1)
 ;
 
-INSERT INTO askareet (otsikko, valmis, user_id, kuvaus_id, prioriteetti_id, luokka_id) VALUES
+INSERT INTO askare (otsikko, valmis, user_id, kuvaus_id, prioriteetti_id, luokka_id) VALUES
   ('tsoha', false, (SELECT id FROM users WHERE kayttajanimi = 'tester'), 
   (SELECT id FROM kuvaus WHERE kuvausteksti = 'askarekuvaus1'),
   (SELECT id FROM tarkeysaste WHERE otsikko='Ehkä huomenna'),

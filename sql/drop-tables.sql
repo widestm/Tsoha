@@ -1,5 +1,5 @@
 
-DROP TABLE askareet;
+DROP TABLE askare;
 
 DROP TABLE tarkeysaste;
 
