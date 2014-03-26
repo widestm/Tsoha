@@ -9,3 +9,4 @@ DROP TABLE luokka;
 DROP TABLE kuvaus;
 
 DROP TABLE users;
+
