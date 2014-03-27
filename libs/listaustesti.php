@@ -1,7 +1,7 @@
 <?php
 //require_once sisällyttää annetun tiedoston vain kerran
 require_once './Tietokantayhteys.php';
-require_once '../models/Kayttaja.php';
+require_once './models/Kayttaja.php';
 //Lista asioista array-tietotyyppiin laitettuna:
 $lista = Kayttaja::etsiKaikkiKayttajat();
 
@@ -12,10 +12,10 @@ $lista = Kayttaja::etsiKaikkiKayttajat();
     <body>
         <h1>Listaustesti</h1>
         <ul>
-            <?php foreach ($lista as $kayttaja): ?>
+            <?php foreach ($lista as $kayttajatunnus): ?>
                 <?php
-                $kayttajatunnus = $kayttaja->getKayttajaTunnus();
-                $salasana = $kayttaja->getSalasana();
+                $kayttajatunnus = $kayttajatunnus->getKayttajaTunnus();
+                $salasana = $kayttajatunnus->getSalasana();
                 ?>
                 <li><?php echo "$kayttajatunnus, $salasana"; ?></li>
              <?php endforeach; ?>
