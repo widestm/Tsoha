@@ -6,7 +6,6 @@ class Kayttaja {
     private $kayttajanimi;
     private $salasana;
 
-
     public static function etsiKaikkiKayttajat() {
         $sql = "SELECT id, kayttajanimi, salasana FROM users";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -25,6 +24,26 @@ class Kayttaja {
         return $tulokset;
     }
 
+    /* Etsitään kannasta käyttäjätunnuksella ja salasanalla käyttäjäriviä */
+
+    public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {
+        $sql = "SELECT id, kayttajanimi, salasana from users where kayttajanimi = ? AND salasana = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($kayttaja, $salasana));
+
+        $tulos = $kysely->fetchObject();
+        if ($tulos == null) {
+            return null;
+        } else {
+            $kayttaja = new Kayttaja();
+            $kayttaja->setId($tulos->id);
+            $kayttaja->setTunnus($tulos->kayttajanimi);
+            $kayttaja->setSalasana($tulos->salasana);
+
+            return $kayttaja;
+        }
+    }
+
     public function getKayttajaTunnus() {
         return $this->kayttajanimi;
     }
@@ -32,7 +51,8 @@ class Kayttaja {
     public function getSalasana() {
         return $this->salasana;
     }
-    public function getId(){
+
+    public function getId() {
         return $this->id;
     }
 
@@ -47,4 +67,5 @@ class Kayttaja {
     public function setSalasana($salasana) {
         $this->salasana = $salasana;
     }
+
 }

@@ -1,5 +1,7 @@
 <?php
   require_once './libs/common.php';
+  require_once './libs/Tietokantayhteys.php';
+  require_once './libs/models/Kayttaja.php';
   
   
   //Tarkistetaan että vaaditut kentät on täytetty:
@@ -8,18 +10,20 @@
       'virhe' => "Kirjautuminen epäonnistui! Et antanut käyttäjätunnusta.",
     ));
   }
-  $kayttajatunnus = $_POST["kayttajatunnus"];
+  $kayttaja = $_POST["kayttajatunnus"];
 
   if (empty($_POST["salasana"])) {
     naytaNakyma("kirjautumislomake.php", array(
-      'kayttajatunnus' => $kayttajatunnus,
+      'kayttajatunnus' => $kayttaja,
       'virhe' => "Kirjautuminen epäonnistui! Et antanut salasanaa.",
     ));
   }
   $salasana = $_POST["salasana"];
   
   /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
-  if ($kayttajatunnus == 'admin' && $salasana == 'pword') {
+  $kayttaja = Kayttaja::etsiKayttajaTunnuksilla($kayttaja, $salasana);
+  
+  if (isset($kayttaja)) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
     header('Location: html-demo/etusivu.php');
   } else {
@@ -28,7 +32,7 @@
      */
     naytaNakyma("kirjautumislomake.php", array(
       /* Välitetään näkymälle tieto siitä, kuka yritti kirjautumista */
-      'kayttajatunnus' => $kayttajatunnus,
+      'kayttajatunnus' => $kayttaja,
       'virhe' => "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä.",
     ));
   }

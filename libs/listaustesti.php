@@ -12,10 +12,10 @@ $lista = Kayttaja::etsiKaikkiKayttajat();
     <body>
         <h1>Listaustesti</h1>
         <ul>
-            <?php foreach ($lista as $kayttajatunnus): ?>
+            <?php foreach ($lista as $kayttaja): ?>
                 <?php
-                $kayttajatunnus = $kayttajatunnus->getKayttajaTunnus();
-                $salasana = $kayttajatunnus->getSalasana();
+                $kayttajatunnus = $kayttaja->getKayttajaTunnus();
+                $salasana = $kayttaja->getSalasana();
                 ?>
                 <li><?php echo "$kayttajatunnus, $salasana"; ?></li>
              <?php endforeach; ?>
