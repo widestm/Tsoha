@@ -1,3 +1,7 @@
+<?php
+require_once '../libs/common.php';
+kirjautunut();
+?>
 <!DOCTYPE html>
 <html>
     <head>

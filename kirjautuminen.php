@@ -1,9 +1,7 @@
 <?php
 
 require_once './libs/common.php';
-require_once './libs/Tietokantayhteys.php';
 require_once './libs/models/Kayttaja.php';
-
 
 //Tarkistetaan että vaaditut kentät on täytetty:
 if (empty($_POST["kayttajatunnus"])) {

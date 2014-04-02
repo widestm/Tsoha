@@ -1,6 +1,6 @@
 <?php
 //require_once sisällyttää annetun tiedoston vain kerran
-require_once './Tietokantayhteys.php';
+require_once './common.php';
 require_once './models/Kayttaja.php';
 //Lista asioista array-tietotyyppiin laitettuna:
 $lista = Kayttaja::etsiKaikkiKayttajat();
