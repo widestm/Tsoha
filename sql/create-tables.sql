@@ -39,7 +39,7 @@ CREATE TABLE askare (
   id serial PRIMARY KEY,
   otsikko varchar NOT NULL,
   valmis boolean DEFAULT FALSE,
-  lisapyspvm date NOT NULL DEFAULT CURRENT_DATE,
+  lisayspvm date NOT NULL DEFAULT CURRENT_DATE,
   user_id integer REFERENCES users(id) ON DELETE CASCADE,
   kuvaus_id integer REFERENCES kuvaus(id) ON DELETE CASCADE,
   prioriteetti_id integer REFERENCES tarkeysaste(id) ON DELETE CASCADE
