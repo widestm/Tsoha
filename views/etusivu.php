@@ -37,6 +37,7 @@ kirjautunut();
             <li><a href="#">Luokittain</a></li>
         </ul>
         <?php
+        //require_once '../libs/controllers/askareController.php';
         require 'askarelistaus.php';
         ?>
     </body>

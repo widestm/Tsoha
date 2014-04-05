@@ -14,7 +14,7 @@ class Askare {
     private $prioriteetti_id;
 
     public static function etsiKaikkiAskareet() {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare order by valmis DESC";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -59,10 +59,10 @@ class Askare {
     }
 
     public static function etsiKayttajanAskareet($id) {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare where user_id = $id";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare WHERE user_id = $id";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
-        
+
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $askare = new Askare();
@@ -78,7 +78,6 @@ class Askare {
             $tulokset[] = $askare;
         }
         return $tulokset;
-        
     }
 
     private function setId($id) {
@@ -136,5 +135,28 @@ class Askare {
     public function getPrioriteetti_id() {
         return $this->prioriteetti_id;
     }
+
+//    public static function haePrioriteetti() {
+//        $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste WHERE id = $this->prioriteetti_id";
+//        $kysely = getTietokantayhteys()->prepare($sql);
+//        $kysely->execute();
+//
+//        $tulos = $kysely->fetchObject();
+//        if ($tulos == null) {
+//            return null;
+//        } else {
+//            $askare = new Askare();
+//
+//            $askare->setId($tulos->id);
+//            $askare->setOtsikko($tulos->otsikko);
+//            $askare->setValmis($tulos->valmis);
+//            $askare->setLisayspvm($tulos->lisayspvm);
+//            $askare->setUser_id($tulos->user_id);
+//            $askare->setKuvaus_id($tulos->kuvaus_id);
+//            $askare->setPrioriteetti_id($tulos->prioriteetti_id);
+//
+//            return $askare;
+//        }
+//    }
 
 }

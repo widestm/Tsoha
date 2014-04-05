@@ -20,24 +20,35 @@ INSERT INTO luokka (otsikko, kuvaus_id, ylaluokka_id) VALUES
 
 INSERT INTO tarkeysaste (otsikko, prioriteetti) VALUES
   ('ERITTÄIN TÄRKEÄ', 5),
-  ('Ei niin tärkeä', 2),
+  ('Tärkeä', 3),
+  ('Nah', 2),
   ('Ehkä huomenna', 1)
 ;
 
 INSERT INTO askare (otsikko, valmis, user_id, kuvaus_id, prioriteetti_id) VALUES
-  ('tsoha', false, (SELECT id FROM users WHERE kayttajanimi = 'tester'), 
+  ('Tsoha', false, (SELECT id FROM users WHERE kayttajanimi = 'tester'), 
   (SELECT id FROM kuvaus WHERE kuvausteksti = 'askarekuvaus1'),
   (SELECT id FROM tarkeysaste WHERE otsikko='Ehkä huomenna')),
-  ('tiskaa', false, (SELECT id FROM users WHERE kayttajanimi = 'admin'), 
+  ('Tiskaa', true, (SELECT id FROM users WHERE kayttajanimi = 'admin'), 
   (SELECT id FROM kuvaus WHERE kuvausteksti = 'kotityökuvaus'),
-  (SELECT id FROM tarkeysaste WHERE otsikko='ERITTÄIN TÄRKEÄ'))
+  (SELECT id FROM tarkeysaste WHERE otsikko='Ehkä huomenna')),
+  ('Sähkölasku', false, (SELECT id FROM users WHERE kayttajanimi = 'admin'), 
+  (SELECT id FROM kuvaus WHERE kuvausteksti = 'kotityökuvaus'),
+  (SELECT id FROM tarkeysaste WHERE otsikko='ERITTÄIN TÄRKEÄ')),
+  ('Tira', false, (SELECT id FROM users WHERE kayttajanimi = 'admin'), 
+  (SELECT id FROM kuvaus WHERE kuvausteksti = 'askarekuvaus1'),
+  (SELECT id FROM tarkeysaste WHERE otsikko='Tärkeä')),
+  ('Herää', true, 1, 3, 4),
+  ('Harjaa hampaat', true, 2, 2, 1)
 ;
 
 INSERT INTO askareenluokat(askare_id, luokka_id) VALUES
   (1, 2),
   (2, 1),
-  (2, 2)
+  (2, 2),
+  (3, 3),
+  (4, 4)
 ;
 
 
-    
+  

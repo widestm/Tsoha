@@ -56,15 +56,15 @@ class Kayttaja {
         return $this->id;
     }
 
-    public function setId($id) {
+    private function setId($id) {
         $this->id = $id;
     }
 
-    public function setTunnus($kayttajanimi) {
+    private function setTunnus($kayttajanimi) {
         $this->kayttajanimi = $kayttajanimi;
     }
 
-    public function setSalasana($salasana) {
+    private function setSalasana($salasana) {
         $this->salasana = $salasana;
     }
 
