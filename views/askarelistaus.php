@@ -2,7 +2,6 @@
 require_once '../libs/models/Askare.php';
 require_once '../libs/models/Prioriteetti.php';
 ?>
-
 <div class="container">
     <h3>Askareet</h3>
     <table class="table table-striped">
@@ -16,13 +15,12 @@ require_once '../libs/models/Prioriteetti.php';
                 <th>Tehty</th>
             </tr>
         </thead>
-
         <tbody>
             <?php foreach (Askare::etsiKaikkiAskareet() as $askare): ?>
                 <?php $prio = Prioriteetti::haePrioriteetti($askare->getPrioriteetti_id()); ?>
                 <tr>
                     <td><?php echo $askare->getOtsikko() ?></td>
-                    <td><?php echo $askare->getKuvaus_id() ?></td>
+                    <td><?php echo $askare->getKuvaus() ?></td>
                     <td><?php echo $prio->getOtsikko(); ?></td>
                     <td> JokuLuokka </td>
                     <td><?php echo $askare->getLisayspvm() ?></td>

@@ -10,13 +10,29 @@ class Askare {
     private $valmis;
     private $lisayspvm;
     private $user_id;
-    private $kuvaus_id;
+    private $kuvaus;
     private $prioriteetti_id;
+    private $virheet = array();
+
+    public function lisaaKantaan() {
+        $sql = "INSERT INTO askare(otsikko, valmis, user_id, kuvaus, prioriteetti_id) VALUES(?,?,?,?,?) RETURNING id";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getOtsikko(), $this->getValmis(), $_SESSION['kirjautunut'],
+            $this->getKuvaus(), $this->getPrioriteetti_id()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
 
     public static function etsiKaikkiAskareet() {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare order by valmis DESC";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare order by valmis DESC";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
+
 
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
@@ -27,7 +43,7 @@ class Askare {
             $askare->setValmis($tulos->valmis);
             $askare->setLisayspvm($tulos->lisayspvm);
             $askare->setUser_id($tulos->user_id);
-            $askare->setKuvaus_id($tulos->kuvaus_id);
+            $askare->setKuvaus($tulos->kuvaus);
             $askare->setPrioriteetti_id($tulos->prioriteetti_id);
 
             $tulokset[] = $askare;
@@ -36,7 +52,7 @@ class Askare {
     }
 
     public static function etsiAskareId($id) {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare where id = ? LIMIT 1";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare where id = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($id));
 
@@ -51,7 +67,7 @@ class Askare {
             $askare->setValmis($tulos->valmis);
             $askare->setLisayspvm($tulos->lisayspvm);
             $askare->setUser_id($tulos->user_id);
-            $askare->setKuvaus_id($tulos->kuvaus_id);
+            $askare->setKuvaus($tulos->kuvaus);
             $askare->setPrioriteetti_id($tulos->prioriteetti_id);
 
             return $askare;
@@ -59,7 +75,7 @@ class Askare {
     }
 
     public static function etsiKayttajanAskareet($id) {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus_id, prioriteetti_id FROM askare WHERE user_id = $id";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare WHERE user_id = $id";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -72,7 +88,7 @@ class Askare {
             $askare->setValmis($tulos->valmis);
             $askare->setLisayspvm($tulos->lisayspvm);
             $askare->setUser_id($tulos->user_id);
-            $askare->setKuvaus_id($tulos->kuvaus_id);
+            $askare->setKuvaus($tulos->kuvaus);
             $askare->setPrioriteetti_id($tulos->prioriteetti_id);
 
             $tulokset[] = $askare;
@@ -86,6 +102,12 @@ class Askare {
 
     private function setOtsikko($otsikko) {
         $this->otsikko = $otsikko;
+
+        if (trim($this->otsikko) == '') {
+            $this->virheet['otsikko'] = "Nimi ei saa olla tyhjä.";
+        } else {
+            unset($this->virheet['otsikko']);
+        }
     }
 
     private function setValmis($valmis) {
@@ -100,8 +122,8 @@ class Askare {
         $this->user_id = $user_id;
     }
 
-    private function setKuvaus_id($kuvaus_id) {
-        $this->kuvaus_id = $kuvaus_id;
+    private function setKuvaus($kuvaus) {
+        $this->kuvaus = $kuvaus;
     }
 
     private function setPrioriteetti_id($prioriteetti_id) {
@@ -128,12 +150,20 @@ class Askare {
         return $this->user_id;
     }
 
-    public function getKuvaus_id() {
-        return $this->kuvaus_id;
+    public function getKuvaus() {
+        return $this->kuvaus;
     }
 
     public function getPrioriteetti_id() {
         return $this->prioriteetti_id;
+    }
+
+    public function onkoKelvollinen() {
+        return empty($this->virheet);
+    }
+
+    public function getVirheet() {
+        return $this->virheet;
     }
 
 //    public static function haePrioriteetti() {
@@ -158,5 +188,4 @@ class Askare {
 //            return $askare;
 //        }
 //    }
-
 }

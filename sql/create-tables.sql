@@ -8,11 +8,11 @@ CREATE TABLE users (
 );
 
 -- Kuvaustaulun luonti
-
-CREATE TABLE kuvaus (
-  id serial PRIMARY KEY,
-  kuvausteksti text NOT NULL
-);
+-- !!  Kuvaustulu poistettu käytöstä kokonaan  !!
+--CREATE TABLE kuvaus (
+--  id serial PRIMARY KEY,
+--  kuvausteksti text NOT NULL
+--);
 
 
 -- Luokkataulun luonti
@@ -20,7 +20,7 @@ CREATE TABLE kuvaus (
 CREATE TABLE luokka (
   id serial PRIMARY KEY,
   otsikko varchar NOT NULL,
-  kuvaus_id integer REFERENCES kuvaus(id) ON DELETE CASCADE,
+  kuvaus text,
   ylaluokka_id integer REFERENCES luokka(id)
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE askare (
   valmis boolean DEFAULT FALSE,
   lisayspvm date NOT NULL DEFAULT CURRENT_DATE,
   user_id integer REFERENCES users(id) ON DELETE CASCADE,
-  kuvaus_id integer REFERENCES kuvaus(id) ON DELETE CASCADE,
+  kuvaus text NOT NULL,
   prioriteetti_id integer REFERENCES tarkeysaste(id) ON DELETE CASCADE
 );
 
