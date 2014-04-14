@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr> 
                         <td>Herää</td>
                         <td>Jos kello soi aamulla...</td>
                         <td>Erittäin tärkeä</td>
