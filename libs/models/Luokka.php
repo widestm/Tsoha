@@ -74,5 +74,8 @@ class Luokka {
     public function getVirheet() {
         return $this->virheet;
     }
+    public function onkoYlaluokkaa(){
+        return empty($this->ylaluokka_id);
+    }
 
 }
