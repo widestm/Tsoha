@@ -14,6 +14,23 @@ class Askare {
     private $prioriteetti_id;
     private $virheet = array();
 
+    public function paivitaKantaan() {
+        $sql = "UPDATE askare SET otsikko = ?, kuvaus = ?, valmis = ?, user_id = ?, prioriteetti_id = ?  WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getOtsikko(), $this->getKuvaus(), $this->getValmis(), $this->getUser_id(), $this->getPrioriteetti_id(), $this->getID()));
+        if ($ok) {
+            
+        }
+        return $ok;
+    }
+
+    public function poistaKannasta() {
+        $sql = "DELETE FROM askare WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getID()));
+    }
+
     public function lisaaKantaan() {
         $sql = "INSERT INTO askare(otsikko, valmis, user_id, kuvaus, prioriteetti_id) VALUES(?,?,?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);

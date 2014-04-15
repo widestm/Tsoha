@@ -21,8 +21,6 @@ function haeKirjautunutKayttaja() {
     return $_SESSION['kirjautunut'];
 }
 
-
-
 function naytaNakyma($sivu, $data = array()) {
     $data = (object) $data;
     require_once 'views/yla.php';
@@ -37,4 +35,8 @@ function kirjautunut() {
         redirect('../kirjautuminen.php');
     }
     return true;
+}
+
+function siistiString($s) {
+    return htmlspecialchars(trim($s));
 }

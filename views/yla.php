@@ -16,10 +16,12 @@
         <div id="left">
             <div class="box">
                 <?php
-                require './views/navi.php';
+                if (isset($_SESSION['kirjautunut'])) {
+                    require './views/navi.php';
+                }
                 ?>
             </div>
         </div>
-        <?php if (!empty($data->virhe)): ?>
-            <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-        <?php endif; ?>
+        <?php /*  if (!empty($data->virhe)): ?>
+          <div class="alert alert-danger">//<?php echo $data->virhe; ?></div>
+          <?php  endif; */ ?> 
