@@ -1,44 +1,30 @@
+<?php
+$plist = $data->prioriteetit;
+?>
+<div id="content">
+    <form method="GET">
+        <button type="submit" name="uusitark" class="btn btn-default" formaction="tarkeysasteet.php" >Lisää uusi tärkeysaste</button>
+    </form>
+</div>
+
 <div class="container">
-    <h3>Prioriteetit</h3>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Otsikko</th>
                 <th>Prioriteetti</th>
-                <th>Muuta järjestystä</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Erittäin tärkeä</td>
-                <td>1</td>
-                <td><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
+            <?php foreach ($plist as $priot) : ?>
+                <tr>
+                    <td><?php echo $priot->getOtsikko(); ?></td>
+                    <td><?php echo $priot->getPrioriteetti(); ?></td>
+            <form method="GET" onsubmit="return confirm('Haluatko varmasti poistaa tärkeysasteen?')">
+                <td><button type="submit" name="poistaid" value="<?php echo $priot->getId(); ?>" class="btn btn-danger" formaction="tarkeysasteet.php" >Poista</button></td>
+            </form>
             </tr>
-            <tr>
-                <td>Tärkeä</td>
-                <td>2</td>
-                <td><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
-            </tr>
-            <tr>
-                <td>Jos jaksaa</td>
-                <td>3</td>
-                <td><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
-            </tr>
-            <tr>
-                <td>Ehkä huomenna</td>
-                <td>4</td>
-                <td><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
-            </tr>
-            <tr>
-                <td>Ehh...</td>
-                <td>5</td>
-                <td><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span></button></td>
-            </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>

@@ -5,6 +5,7 @@ class Prioriteetti {
     private $id;
     private $otsikko;
     private $prioriteetti;
+    private $virheet = array();
 
     public static function haePrioriteetti($i) {
         $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste WHERE id =$i ";
@@ -41,12 +42,37 @@ class Prioriteetti {
         return $tulokset;
     }
 
+    public function lisaaKantaan() {
+        $sql = "INSERT INTO tarkeysaste(otsikko, prioriteetti) VALUES(?,?) RETURNING id";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getOtsikko(), $this->getPrioriteetti()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
+
+    public function poistaKannasta() {
+        $sql = "DELETE FROM tarkeysaste WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getId()));
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
 
     public function setOtsikko($otsikko) {
-        $this->otsikko = $otsikko;
+        $this->otsikko = siistiString($otsikko);
+
+        if (trim($this->otsikko) == '') {
+            $this->virheet['otsikko'] = "Sinun täytyy antaa otsikko!";
+        } else {
+            unset($this->virheet['otsikko']);
+        }
     }
 
     public function setPrioriteetti($prioriteetti) {
@@ -54,6 +80,9 @@ class Prioriteetti {
     }
 
     public function getId() {
+        if (!isset($this->id)) {
+            return 1;
+        }
         return $this->id;
     }
 
@@ -63,6 +92,14 @@ class Prioriteetti {
 
     public function getPrioriteetti() {
         return $this->prioriteetti;
+    }
+
+    public function onkoKelvollinen() {
+        return empty($this->virheet);
+    }
+
+    public function getVirheet() {
+        return $this->virheet;
     }
 
 }

@@ -19,7 +19,9 @@ $salasana2 = $_POST['salasana2'];
 
 if ($salasana1 != $salasana2) {
     $_SESSION['virheet'] = "Salasanat eivät täsmää.";
-    naytaNakyma("rekisteroitymislomake.php");
+    naytaNakyma("rekisteroitymislomake.php", array(
+        'kayttajatunnus' => $tunnus,
+    ));
 }
 $lisattava->setTunnus($tunnus);
 $lisattava->setSalasana($salasana1);

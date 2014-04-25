@@ -19,6 +19,7 @@ INSERT INTO luokka (otsikko, kuvaus, ylaluokka_id) VALUES
 ;
 
 INSERT INTO tarkeysaste (otsikko, prioriteetti) VALUES
+  ('ei asetettu' , 0 ),  
   ('ERITTÄIN TÄRKEÄ', 5),
   ('Tärkeä', 3),
   ('Nah', 2),

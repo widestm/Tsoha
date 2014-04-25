@@ -46,10 +46,12 @@ $id = $data->id;
                     <textarea class="form-control" rows="3" placeholder="Askareen kuvaus" name="kuvaus"><?php echo $kuvaus; ?></textarea>
                 </div>
             </div>
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-success">Tallenna</button>
+                    <button type="submit" name="tallennaNappi" class="btn btn-success">Tallenna</button>
                     <button type="reset" class="btn btn-default">Peruuta</button>
+                    <button type="submit" name="takaisin" class="btn btn-default">Takaisin</button>
                 </div>
             </div>   
         </form>

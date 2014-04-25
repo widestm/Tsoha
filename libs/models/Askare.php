@@ -15,10 +15,14 @@ class Askare {
     private $virheet = array();
 
     public function paivitaKantaan() {
-        $sql = "UPDATE askare SET otsikko = ?, kuvaus = ?, valmis = ?, user_id = ?, prioriteetti_id = ?  WHERE id = ?";
+        $sql = "UPDATE askare SET otsikko = ?, valmis = ?, kuvaus = ?, prioriteetti_id = ?  WHERE id = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getOtsikko(), $this->getKuvaus(), $this->getValmis(), $this->getUser_id(), $this->getPrioriteetti_id(), $this->getID()));
+        $ok = $kysely->execute(array($this->getOtsikko(),
+            $this->getValmis(),
+            $this->getKuvaus(),
+            $this->getPrioriteetti_id(),
+            $this->getId()));
         if ($ok) {
             
         }
@@ -127,7 +131,10 @@ class Askare {
     }
 
     public function setValmis($valmis) {
-        $this->valmis = $valmis;
+        if ($valmis) {
+            $this->valmis = 1;
+        } else
+            $this->valmis = 0;
     }
 
     public function setLisayspvm($lisayspvm) {
@@ -171,6 +178,9 @@ class Askare {
     }
 
     public function getPrioriteetti_id() {
+        if (!isset($this->prioriteetti_id)) {
+            return 1;
+        }
         return $this->prioriteetti_id;
     }
 
@@ -181,17 +191,14 @@ class Askare {
     public function getVirheet() {
         return $this->virheet;
     }
-    public function vaihdaValmis(){
+
+    public function vaihdaValmis() {
         if ($this->valmis) {
             $this->valmis = 0;
-        }
-        else {
+        } else {
             $this->valmis = 1;
         }
     }
-
-
-
 
 //    public static function haePrioriteetti() {
 //        $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste WHERE id = $this->prioriteetti_id";

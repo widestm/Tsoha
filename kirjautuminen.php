@@ -16,7 +16,7 @@ $kayttajatunnus = $_POST["kayttajatunnus"];
 
 if (empty($_POST["salasana"])) {
     naytaNakyma("kirjautumislomake.php", array(
-        'kayttajatunnus' => $kayttaja,
+        'kayttajatunnus' => $kayttajatunnus,
         'virhe' => "Kirjautuminen epäonnistui! Et antanut salasanaa.",
     ));
 }
@@ -36,7 +36,7 @@ if (isset($kayttaja)) {
      */
     naytaNakyma("kirjautumislomake.php", array(
         /* Välitetään näkymälle tieto siitä, kuka yritti kirjautumista */
-        'kayttajatunnus' => $kayttaja,
+        'kayttajatunnus' => $kayttajatunnus,
         'virhe' => "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä.",
     ));
 }

@@ -6,6 +6,9 @@ require_once './libs/models/Kayttaja.php';
 
 kirjautunut();
 
+if (isset($_POST["takaisin"])) {
+    header("Location: index.php");
+}
 if (!isset($_POST['lisaaNappi'])) {
     naytaNakyma('askareenlisays.php');
 }

@@ -1,12 +1,12 @@
 <div id="header">
-    <h1>Kirjaudu sisään</h1>
+    <h3>Kirjaudu sisään tai rekisteröidy käyttääksesi muistilistaa</h3>
 </div>
 <div class="container" >
     <form class="form-horizontal" role="form" action="kirjautuminen.php" method="POST">
         <div class="form-group">
             <label for="kayttajatunnus" class="col-md-2 control-label">Käyttäjätunnus:</label>
             <div class="col-md-3">
-                <input type="text" class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus" value="<?php echo $data->kayttaja; ?>">
+                <input type="text" class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus" value="<?php echo $data->kayttajatunnus; ?>">
             </div>
         </div>
         <div class="form-group">

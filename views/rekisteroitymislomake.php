@@ -1,12 +1,12 @@
 <div id="header">
-    <h1>Anna rekisteröitymiseen tarvittavat tiedot</h1>
+    <h3>Anna rekisteröitymiseen tarvittavat tiedot</h3>
 </div>
 <div class="container" >
     <form class="form-horizontal" role="form" action="rekisteroi.php" method="POST">
         <div class="form-group">
             <label for="kayttajatunnus" class="col-md-2 control-label">Käyttäjätunnus:</label>
             <div class="col-md-3">
-                <input type="text" class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus">
+                <input type="text" class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus" value="<?php echo $data->kayttajatunnus; ?>">
             </div>
         </div>
         <div class="form-group">
