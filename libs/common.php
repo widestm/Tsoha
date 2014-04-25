@@ -31,11 +31,16 @@ function naytaNakyma($sivu, $data = array()) {
 
 function kirjautunut() {
     if (!isset($_SESSION['kirjautunut'])) {
-        setErrors(array('Sinun on kirjauduttava sisään nähdäksesi tämä sivu.'));
-        redirect('../kirjautuminen.php');
+        setErrors('Sinun on kirjauduttava sisään nähdäksesi tämä sivu.');
+        header('Location: kirjautuminen.php');
     }
     return true;
 }
+function setErrors($virhe) {
+    $_SESSION['virheet'] = $virhe;
+}
+
+
 
 function siistiString($s) {
     return htmlspecialchars(trim($s));

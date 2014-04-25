@@ -10,7 +10,7 @@ if (isset($_GET["kirjauduUlos"])) {
 $kayttaja = haeKirjautunutKayttaja();
 
 if (isset($kayttaja)) {
-    header('Location: views/etusivu.php');
+    naytaNakyma("./etusivu.php");
 } else {
     header('Location: kirjautuminen.php');
 }

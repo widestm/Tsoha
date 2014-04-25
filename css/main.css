@@ -22,6 +22,7 @@ body {
     margin:10px 0;
 }
 #left {
+    float: left;
     width:200px;
 }
 

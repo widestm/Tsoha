@@ -28,15 +28,14 @@ class Askare {
     public function poistaKannasta() {
         $sql = "DELETE FROM askare WHERE id = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute(array($this->getID()));
+        $kysely->execute(array($this->getId()));
     }
 
     public function lisaaKantaan() {
-        $sql = "INSERT INTO askare(otsikko, valmis, user_id, kuvaus, prioriteetti_id) VALUES(?,?,?,?,?) RETURNING id";
+        $sql = "INSERT INTO askare(otsikko, user_id, kuvaus, prioriteetti_id) VALUES(?,?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getOtsikko(), $this->getValmis(), $_SESSION['kirjautunut'],
-            $this->getKuvaus(), $this->getPrioriteetti_id()));
+        $ok = $kysely->execute(array($this->otsikko, $this->user_id, $this->kuvaus, $this->prioriteetti_id));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
@@ -92,7 +91,7 @@ class Askare {
     }
 
     public static function etsiKayttajanAskareet($id) {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare WHERE user_id = $id";
+        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare WHERE user_id = $id ORDER by valmis DESC ";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -113,37 +112,37 @@ class Askare {
         return $tulokset;
     }
 
-    private function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 
-    private function setOtsikko($otsikko) {
-        $this->otsikko = $otsikko;
+    public function setOtsikko($otsikko) {
+        $this->otsikko = siistiString($otsikko);
 
         if (trim($this->otsikko) == '') {
-            $this->virheet['otsikko'] = "Nimi ei saa olla tyhjä.";
+            $this->virheet['otsikko'] = "Sinun täytyy antaa otsikko!";
         } else {
             unset($this->virheet['otsikko']);
         }
     }
 
-    private function setValmis($valmis) {
+    public function setValmis($valmis) {
         $this->valmis = $valmis;
     }
 
-    private function setLisayspvm($lisayspvm) {
+    public function setLisayspvm($lisayspvm) {
         $this->lisayspvm = $lisayspvm;
     }
 
-    private function setUser_id($user_id) {
+    public function setUser_id($user_id) {
         $this->user_id = $user_id;
     }
 
-    private function setKuvaus($kuvaus) {
-        $this->kuvaus = $kuvaus;
+    public function setKuvaus($kuvaus) {
+        $this->kuvaus = siistiString($kuvaus);
     }
 
-    private function setPrioriteetti_id($prioriteetti_id) {
+    public function setPrioriteetti_id($prioriteetti_id) {
         $this->prioriteetti_id = $prioriteetti_id;
     }
 
@@ -182,6 +181,17 @@ class Askare {
     public function getVirheet() {
         return $this->virheet;
     }
+    public function vaihdaValmis(){
+        if ($this->valmis) {
+            $this->valmis = 0;
+        }
+        else {
+            $this->valmis = 1;
+        }
+    }
+
+
+
 
 //    public static function haePrioriteetti() {
 //        $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste WHERE id = $this->prioriteetti_id";

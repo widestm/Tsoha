@@ -5,6 +5,7 @@ class Kayttaja {
     private $id;
     private $kayttajanimi;
     private $salasana;
+    private $virheet = array();
 
     public static function etsiKaikkiKayttajat() {
         $sql = "SELECT id, kayttajanimi, salasana FROM users";
@@ -43,6 +44,18 @@ class Kayttaja {
             return $kayttaja;
         }
     }
+    public function lisaaKantaan() {
+        $sql = "INSERT INTO users(kayttajanimi, salasana) VALUES(?,?) RETURNING id";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->kayttajanimi, $this->salasana));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
 
     public function getKayttajaTunnus() {
         return $this->kayttajanimi;
@@ -56,16 +69,36 @@ class Kayttaja {
         return $this->id;
     }
 
-    private function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 
-    private function setTunnus($kayttajanimi) {
-        $this->kayttajanimi = $kayttajanimi;
+    public function setTunnus($kayttajanimi) {
+        $this->kayttajanimi = siistiString($kayttajanimi);
+
+        if (trim($this->kayttajanimi) == '') {
+            $this->virheet['kayttajanimi'] = "Sinun täytyy antaa tunnus!";
+        } else {
+            unset($this->virheet['kayttajanimi']);
+        }
     }
 
-    private function setSalasana($salasana) {
-        $this->salasana = $salasana;
+    public function setSalasana($salasana) {
+        $this->salasana = siistiString($salasana);
+
+        if (trim($this->salasana) == '') {
+            $this->virheet['salasana'] = "Sinun täytyy antaa salasana!";
+        } else {
+            unset($this->virheet['salasana']);
+        }
+    }
+
+    public function onkoKelvollinen() {
+        return empty($this->virheet);
+    }
+
+    public function getVirheet() {
+        return $this->virheet;
     }
 
 }

@@ -25,7 +25,7 @@ class Prioriteetti {
     }
 
     public static function haePrioriteetit() {
-        $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste";
+        $sql = "SELECT id, otsikko, prioriteetti FROM tarkeysaste ORDER BY prioriteetti desc";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -35,7 +35,7 @@ class Prioriteetti {
 
             $prio->setId($tulos->id);
             $prio->setOtsikko($tulos->otsikko);
-            $prio->setPrioriteetti($tulokset->prioriteetti);
+            $prio->setPrioriteetti($tulos->prioriteetti);
             $tulokset[] = $prio;
         }
         return $tulokset;
