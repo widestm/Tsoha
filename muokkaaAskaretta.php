@@ -2,10 +2,11 @@
 
 require_once './libs/common.php';
 require_once './libs/models/Askare.php';
+require_once './libs/models/Luokka.php';
 
 kirjautunut();
 
-if (isset($_POST["takaisin"])){
+if (isset($_POST["takaisin"])) {
     header("Location: index.php");
 }
 
@@ -31,7 +32,14 @@ if (isset($_POST["tallennaNappi"])) {
     $muokattavalomakkeelta->setKuvaus($_POST["kuvaus"]);
     $muokattavalomakkeelta->setOtsikko($_POST["otsikko"]);
     $muokattavalomakkeelta->setPrioriteetti_id($_POST["prioriteetti_id"]);
+    $luokka_id = $_POST["luokka_id"];
     if ($muokattavalomakkeelta->onkoKelvollinen()) {
+        $luokka = Luokka::haeAskareenLuokka($muokattavalomakkeelta->getId());
+        if (!isset($luokka)) {
+            Luokka::asetaAskareelleLuokka($muokattavalomakkeelta->getId(), $luokka_id);
+        } else {
+            Luokka::muokkaaAskareenLuokkaa($muokattavalomakkeelta->getId(), $luokka_id);
+        }
         $muokattavalomakkeelta->paivitaKantaan();
         $_SESSION["ilmoitus"] = "Askareen muokkaus onnistui!";
         header("Location: index.php");

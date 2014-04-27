@@ -15,6 +15,7 @@ CREATE TABLE users (
 --);
 
 
+
 -- Luokkataulun luonti
 
 CREATE TABLE luokka (
@@ -47,7 +48,7 @@ CREATE TABLE askare (
 
 CREATE TABLE askareenluokat (
   id serial PRIMARY KEY,
-  askare_id integer REFERENCES askare(id) ON DELETE SET NULL,  
+  askare_id integer REFERENCES askare(id) ON DELETE CASCADE,  
   luokka_id integer REFERENCES luokka(id) ON DELETE SET NULL
 );
 

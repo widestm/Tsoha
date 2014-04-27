@@ -1,6 +1,7 @@
 <?php
 require_once './libs/models/Askare.php';
 require_once './libs/models/Prioriteetti.php';
+require_once './libs/models/Luokka.php';
 ?>
 <div class="container">
     <table class="table table-striped">
@@ -19,11 +20,19 @@ require_once './libs/models/Prioriteetti.php';
         <tbody>
             <?php foreach (Askare::etsiKayttajanAskareet(haeKirjautunutKayttaja()) as $askare): ?>
                 <?php $prio = Prioriteetti::haePrioriteetti($askare->getPrioriteetti_id()); ?>
+                <?php $askareenluokka = Luokka::haeLuokka(Luokka::haeAskareenLuokka($askare->getId())) ?>
                 <tr>
                     <td><?php echo $askare->getOtsikko() ?></td>
                     <td><?php echo $askare->getKuvaus() ?></td>
-                    <td><?php echo $prio->getOtsikko(); ?></td>
-                    <td> JokuLuokka </td>
+                    <td><?php
+                        echo $prio->getOtsikko();
+                        echo '     (';
+                        echo $prio->getPrioriteetti();
+                        echo ')';
+                        ?></td>
+                    <td> <?php if (isset($askareenluokka)) {
+                        echo $askareenluokka->getOtsikko();
+                    } ?> </td>
                     <td><?php echo $askare->getLisayspvm() ?></td>
                     <?php
                     if ($askare->getValmis()) {
@@ -42,7 +51,7 @@ require_once './libs/models/Prioriteetti.php';
                 <td><button type="submit" name="id" value="<?php echo $askare->getId(); ?>" class="btn btn-danger" formaction="poistaAskare.php" >Poista</button></td>
             </form>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach; ?>
         </tbody> 
     </table>
 </div>

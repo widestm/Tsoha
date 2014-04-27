@@ -49,7 +49,10 @@ class Askare {
     }
 
     public static function etsiKaikkiAskareet() {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare order by valmis DESC";
+        $sql = "SELECT a.id, a.otsikko, a.valmis, a.lisayspvm, a.user_id, a.kuvaus,
+            a.prioriteetti_id FROM askare a INNER JOIN tarkeysaste t 
+            ON a.prioriteetti_id = t.id order by a.valmis, t.prioriteetti DESC";
+        //$sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare order by valmis DESC";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -95,7 +98,10 @@ class Askare {
     }
 
     public static function etsiKayttajanAskareet($id) {
-        $sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare WHERE user_id = $id ORDER by valmis DESC ";
+        $sql = "SELECT a.id, a.otsikko, a.valmis, a.lisayspvm, a.user_id, a.kuvaus,
+            a.prioriteetti_id FROM askare a INNER JOIN tarkeysaste t 
+            ON a.prioriteetti_id = t.id WHERE user_id=$id order by a.valmis , t.prioriteetti DESC";
+        //$sql = "SELECT id, otsikko, valmis, lisayspvm, user_id, kuvaus, prioriteetti_id FROM askare WHERE user_id = $id ORDER by valmis DESC ";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 

@@ -1,5 +1,7 @@
 <?php
 
+require_once './libs/models/Kayttaja.php';
+
 session_start();
 /* Näyttää näkymätiedoston ja lähettää sille muuttujat */
 
@@ -21,6 +23,12 @@ function haeKirjautunutKayttaja() {
     return $_SESSION['kirjautunut'];
 }
 
+function onkoAdmin() {
+    if (Kayttaja::etsiKayttajaId(haeKirjautunutKayttaja())->getKayttajaTunnus() == 'admin') {
+        return true;
+    } return FALSE;
+}
+
 function naytaNakyma($sivu, $data = array()) {
     $data = (object) $data;
     require_once 'views/yla.php';
@@ -36,11 +44,10 @@ function kirjautunut() {
     }
     return true;
 }
+
 function setErrors($virhe) {
     $_SESSION['virheet'] = $virhe;
 }
-
-
 
 function siistiString($s) {
     return htmlspecialchars(trim($s));

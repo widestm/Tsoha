@@ -44,6 +44,25 @@ class Kayttaja {
             return $kayttaja;
         }
     }
+
+    public static function etsiKayttajaId($id) {
+        $sql = "SELECT id, kayttajanimi, salasana from users where id=? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($id));
+
+        $tulos = $kysely->fetchObject();
+        if ($tulos == null) {
+            return null;
+        } else {
+            $kayttaja = new Kayttaja();
+            $kayttaja->setId($tulos->id);
+            $kayttaja->setTunnus($tulos->kayttajanimi);
+            $kayttaja->setSalasana($tulos->salasana);
+
+            return $kayttaja;
+        }
+    }
+
     public function lisaaKantaan() {
         $sql = "INSERT INTO users(kayttajanimi, salasana) VALUES(?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -55,6 +74,12 @@ class Kayttaja {
             $this->id = $kysely->fetchColumn();
         }
         return $ok;
+    }
+
+    public function poistaKannasta() {
+        $sql = "DELETE FROM users WHERE id=?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getId()));
     }
 
     public function getKayttajaTunnus() {
