@@ -5,7 +5,7 @@
         <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link rel="icon" href="images/noteicon2.png">
-         
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Muistilista</title>
@@ -23,16 +23,13 @@
                 ?>
             </div>
         </div>
+
         <?php if (!empty($_SESSION['ilmoitus'])): ?>
             <div class="alert alert-info">
                 <?php echo $_SESSION['ilmoitus']; ?>
             </div>
-            <?php
-            // Samalla kun viesti näytetään, se poistetaan istunnosta,
-            // ettei se näkyisi myöhemmin jollain toisella sivulla uudestaan.
-            unset($_SESSION['ilmoitus']);
-        endif;
-        ?>
+            <?php unset($_SESSION['ilmoitus']);
+        endif; ?>
         <?php if (!empty($data->virhe)): ?>
             <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
         <?php endif; ?> 
@@ -44,6 +41,7 @@
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+
         <?php if (!empty($_SESSION['virheet'])): ?>
             <div class="alert alert-danger">
                 <?php echo $_SESSION['virheet']; ?>

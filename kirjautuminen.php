@@ -28,7 +28,7 @@ $kayttaja = Kayttaja::etsiKayttajaTunnuksilla($kayttajatunnus, $salasana);
 if (isset($kayttaja)) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
     $_SESSION['kirjautunut'] = $kayttaja->getId();
-    
+
     header('Location: index.php');
 } else {
     /* Väärän tunnuksen syöttänyt saa eteensä lomakkeen ja virheen.

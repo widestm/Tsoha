@@ -1,4 +1,6 @@
-<?php require_once './libs/models/Askare.php'; ?>
+<?php
+require_once './libs/models/Askare.php';
+?>
 
 <div class="container">
     <table class="table table-striped">

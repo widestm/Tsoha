@@ -6,18 +6,6 @@ require_once './libs/models/Askare.php';
 kirjautunut();
 
 
-
-//$luokat = array();
-//foreach (Askare::etsiKayttajanAskareet(haeKirjautunutKayttaja()) as $askare) {
-//    $luokka_id = Luokka::haeAskareenLuokka($askare->getId());
-//    if (isset($luokka_id)) {
-//        $luokka = Luokka::haeLuokka($luokka_id);
-//        if (!in_array($luokka, $luokat)) {
-//            $luokat[] = Luokka::haeLuokka($luokka_id);
-//        }
-//    }
-//}
-
 if (isset($_GET["poistaid"])) {
     $poistettavap = Luokka::haeLuokka($_GET["poistaid"]);
     $poistettavap->poistaKannasta();
@@ -52,7 +40,6 @@ if (isset($_POST["tallenna"])) {
         }
     }
 }
-
 
 naytaNakyma('luokkalistaus.php', array(
     'luokat' => Luokka::haeKaikkiLuokat(),

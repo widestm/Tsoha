@@ -30,9 +30,11 @@ require_once './libs/models/Luokka.php';
                         echo $prio->getPrioriteetti();
                         echo ')';
                         ?></td>
-                    <td> <?php if (isset($askareenluokka)) {
-                        echo $askareenluokka->getOtsikko();
-                    } ?> </td>
+                    <td> <?php
+                        if (isset($askareenluokka)) {
+                            echo $askareenluokka->getOtsikko();
+                        }
+                        ?> </td>
                     <td><?php echo $askare->getLisayspvm() ?></td>
                     <?php
                     if ($askare->getValmis()) {

@@ -21,7 +21,6 @@ require_once './libs/models/Luokka.php';
                             <option value="<?php echo $prior->getId(); ?>"><?php echo $prior->getOtsikko() . " [ " . $prior->getPrioriteetti() . " ]"; ?></option>
                         <?php endforeach; ?>
                     </select>
-
                 </div>
             </div>
             <div class="form-group">

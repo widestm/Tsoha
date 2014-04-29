@@ -1,6 +1,3 @@
-<?php
-$plist = $data->prioriteetit;
-?>
 <div id="content">
     <form method="GET">
         <button type="submit" name="uusitark" class="btn btn-default" formaction="tarkeysasteet.php" >Lisää uusi tärkeysaste</button>
@@ -16,7 +13,7 @@ $plist = $data->prioriteetit;
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($plist as $priot) : ?>
+            <?php foreach ($data->prioriteetit as $priot) : ?>
                 <tr>
                     <td><?php echo $priot->getOtsikko(); ?></td>
                     <td><?php echo $priot->getPrioriteetti(); ?></td>

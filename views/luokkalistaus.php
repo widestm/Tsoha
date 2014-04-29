@@ -1,6 +1,5 @@
 <?php
 require_once './libs/models/Luokka.php';
-require_once './libs/models/Askare.php';
 ?>
 <div id="content">
     <form method="GET">
@@ -28,7 +27,7 @@ require_once './libs/models/Askare.php';
                         <td><?php echo Luokka::haeLuokka($luokka->getYlaluokka_id())->getOtsikko(); ?></td>
                     <?php } ?>
             <form method="GET" onsubmit="return confirm('Haluatko varmasti poistaa luokan?')">
-                <td><button type="submit" name="poistaid" value="<?php echo $luokka->getId();?>" class="btn btn-danger" formaction="luokka.php" >Poista</button></td>
+                <td><button type="submit" name="poistaid" value="<?php echo $luokka->getId(); ?>" class="btn btn-danger" formaction="luokka.php" >Poista</button></td>
             </form>
             </tr>
         <?php endforeach; ?>

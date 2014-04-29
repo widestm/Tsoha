@@ -6,15 +6,6 @@ require_once './libs/models/Prioriteetti.php';
 
 kirjautunut();
 
-//$askareet = Askare::etsiKayttajanAskareet(haeKirjautunutKayttaja());
-//$prioriteetit = array();
-//foreach ($askareet as $askare) {
-//    $lisattavap = Prioriteetti::haePrioriteetti($askare->getPrioriteetti_id());
-//    if (!in_array($lisattavap, $prioriteetit))
-//        if ($lisattavap->getId() != 1) {
-//            $prioriteetit[] = $lisattavap;
-//        }
-//}
 
 if (isset($_POST["takaisin"])) {
     header("Location: tarkeysasteet.php");

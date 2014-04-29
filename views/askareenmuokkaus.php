@@ -2,11 +2,7 @@
 require_once './libs/common.php';
 require_once './libs/models/Prioriteetti.php';
 require_once './libs/models/Luokka.php';
-$otsikko = $data->otsikko;
 $prioriteetti = Prioriteetti::haePrioriteetti($data->prioriteetti_id);
-$luokka = null;
-$kuvaus = $data->kuvaus;
-$id = $data->id;
 ?>
 <h2>Askareen tiedot</h2>
 <div id="right">
@@ -15,7 +11,7 @@ $id = $data->id;
             <div class="form-group">
                 <label class="col-md-2 control-label">Otsikko</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" name="otsikko" placeholder="Otsikko" value="<?php echo $otsikko; ?>">
+                    <input type="text" class="form-control" name="otsikko" placeholder="Otsikko" value="<?php echo $data->otsikko; ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -43,10 +39,10 @@ $id = $data->id;
             <div class="form-group">
                 <label class="col-md-2 control-label">Kuvaus:</label>
                 <div class="col-md-4">
-                    <textarea class="form-control" rows="3" placeholder="Askareen kuvaus" name="kuvaus"><?php echo $kuvaus; ?></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Askareen kuvaus" name="kuvaus"><?php echo $data->kuvaus; ?></textarea>
                 </div>
             </div>
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo $data->id; ?>">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <button type="submit" name="tallennaNappi" class="btn btn-success">Tallenna</button>

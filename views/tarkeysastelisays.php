@@ -1,6 +1,3 @@
-<?php
-require_once './libs/models/Prioriteetti.php';
-?>
 <br>
 <div id="right"
      <div class="container" >
