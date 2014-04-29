@@ -2,7 +2,6 @@
 
 require_once './libs/common.php';
 require_once './libs/models/Kayttaja.php';
-require_once './libs/models/Askare.php';
 
 kirjautunut();
 
@@ -10,7 +9,6 @@ if (!onkoAdmin()) {
     $_SESSION['virheet'] = "Sinulla ei ole oikeuksia näkemään tätä sivua :(";
     header('Location: index.php');
 }
-$kayttajat = Kayttaja::etsiKaikkiKayttajat();
 
 if (isset($_GET['poistaid'])) {
     $poistettava = Kayttaja::etsiKayttajaId($_GET['poistaid']);
@@ -23,6 +21,7 @@ if (isset($_GET['poistaid'])) {
     }
 }
 
+$kayttajat = Kayttaja::etsiKaikkiKayttajat();
 
 naytaNakyma('kayttajalistaus.php', array(
     'kayttajat' => $kayttajat,
