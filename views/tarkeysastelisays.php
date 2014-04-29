@@ -12,16 +12,9 @@ require_once './libs/models/Prioriteetti.php';
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">Valitse prioriteetti: </label>
+                <label class="col-md-2 control-label">Anna prioriteetti: </label>
                 <div class="col-md-3">
-                    <select name="prioriteetti" class="form-control">
-                        <?php $n = 1; ?>
-                        <?php foreach (Prioriteetti::haePrioriteetit() as $p): ?>
-                            <option value="<?php echo $n; ?>"><?php echo $n; ?></option>
-                            <?php $n++; ?>
-                        <?php endforeach; ?>
-                        <option value="<?php echo $n; ?>"><?php echo $n; ?></option>
-                    </select>
+                    <input type="text" class="form-control" name="prioriteetti" placeholder="Prioriteetti" value="<?php echo $data->prioriteetti; ?>">
                 </div>
             </div>
             <div class="form-group">

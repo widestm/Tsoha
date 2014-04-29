@@ -77,6 +77,14 @@ class Prioriteetti {
 
     public function setPrioriteetti($prioriteetti) {
         $this->prioriteetti = $prioriteetti;
+
+        if (!is_numeric($prioriteetti)) {
+            $this->virheet['prioriteetti'] = "Prioriteetin tulee olla numero.";
+        } else if ($prioriteetti<= 0) {
+            $this->virheet['prioriteetti'] = "Prioriteetin täytyy olla nollaa suurempi luku.";
+        } else {
+            unset($this->virheet['prioriteetti']);
+        }
     }
 
     public function getId() {

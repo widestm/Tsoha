@@ -44,8 +44,12 @@ if (isset($_POST['lisaaNappi'])) {
 
 if (isset($_GET["poistaid"])) {
     $poistettavap = Prioriteetti::haePrioriteetti($_GET["poistaid"]);
-    $poistettavap->poistaKannasta();
-    $_SESSION['ilmoitus'] = "Tärkeysaste poistettiin!";
+    if ($poistettavap->getId() == 1) {
+        $_SESSION['virheet'] = "Tätä tärkeyastetta ei voi poistaa!";
+    } else {
+        $poistettavap->poistaKannasta();
+        $_SESSION['ilmoitus'] = "Tärkeysaste poistettiin!";
+    }
 }
 
 if (!isset($_POST['lisaaNappi'])) {
