@@ -2,6 +2,7 @@
 
 require_once './libs/common.php';
 require_once './libs/models/Kayttaja.php';
+require_once './libs/models/Askare.php';
 
 kirjautunut();
 
@@ -21,6 +22,7 @@ if (isset($_GET['poistaid'])) {
         header('Location: poistakayttaja.php');
     }
 }
+
 
 naytaNakyma('kayttajalistaus.php', array(
     'kayttajat' => $kayttajat,

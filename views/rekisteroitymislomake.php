@@ -1,6 +1,10 @@
 <div id="header">
     <h3>Anna rekisteröitymiseen tarvittavat tiedot</h3>
 </div>
+<div id="header">
+    <p>Huom!<br> Salasana tallennetaan salaamattomana palvelimelle ja näkyy ylläpitäjälle myös sellaisena.</p>
+</div>
+
 <div class="container" >
     <form class="form-horizontal" role="form" action="rekisteroi.php" method="POST">
         <div class="form-group">
