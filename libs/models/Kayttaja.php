@@ -7,6 +7,20 @@ class Kayttaja {
     private $salasana;
     private $virheet = array();
 
+    public function paivitaKantaan() {
+        $sql = "UPDATE users SET kayttajanimi = ?, salasana = ? WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array(
+            $this->getKayttajaTunnus(),
+            $this->getSalasana(),
+            $this->getId()));
+        if ($ok) {
+            
+        }
+        return $ok;
+    }
+
     public static function etsiKaikkiKayttajat() {
         $sql = "SELECT id, kayttajanimi, salasana FROM users";
         $kysely = getTietokantayhteys()->prepare($sql);

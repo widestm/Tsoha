@@ -11,11 +11,14 @@ require_once './libs/common.php';
                     <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/luokka.php">Luokat</a></li> 
                     <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/lisaaAskare.php">Lisää uusi askare</a></li>
                     <br><br>
+                    <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/kayttajatiedot.php">Omat tiedot</a></li>
+                    <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/index.php?kirjauduUlos" >Kirjaudu ulos</a></li>
+                    <br>
+                    <br>
                     <?php if (onkoAdmin()) { ?>
                         <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/poistakayttaja.php">Poista käyttäjiä</a></li>
                     <?php } ?>
-                    <br>
-                    <li><a href="http://mikaelwi.users.cs.helsinki.fi/Tsoha/index.php?kirjauduUlos" >Kirjaudu ulos</a></li>
+
                 </ul>
             </div>
         </div>
